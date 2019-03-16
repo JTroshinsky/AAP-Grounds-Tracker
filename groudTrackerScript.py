@@ -42,37 +42,30 @@ def main():
     servoPINV = 21
     GPIO.setmode(GPIO.BCM)
     GPIO.setup(servoPINH, GPIO.OUT)
-    GPIO.setup(servoPINV, GPIO.OUT)
+    #GPIO.setup(servoPINV, GPIO.OUT)
 
     pH = GPIO.PWM(servoPINH, 50) # GPIO 20 for PWM with 50Hz
     pH.start(2.5) # Initialization
 
-    pV = GPIO.PWM(servoPINV, 50) # GPIO 20 for PWM with 50Hz
-    pV.start(2.5) # Initialization
+    #pV = GPIO.PWM(servoPINV, 50) # GPIO 20 for PWM with 50Hz
+    #pV.start(2.5) # Initialization
 
     while(1):
 
         try:
           while True:
             pH.ChangeDutyCycle(5)
-            time.sleep(0.5)
+            time.sleep(1)
             pH.ChangeDutyCycle(7.5)
-            time.sleep(0.5)
+            time.sleep(1)
             pH.ChangeDutyCycle(10)
-            time.sleep(0.5)
-            pH.ChangeDutyCycle(12.5)
-            time.sleep(0.5)
-            pH.ChangeDutyCycle(10)
-            time.sleep(0.5)
-            pH.ChangeDutyCycle(7.5)
-            time.sleep(0.5)
-            pH.ChangeDutyCycle(5)
-            time.sleep(0.5)
-            pH.ChangeDutyCycle(2.5)
-            time.sleep(0.5)
+            time.sleep(1)
+            pH.ChangeDutyCycle(12.4)
+            time.sleep(1)
+
         except KeyboardInterrupt:
           pH.stop()
-          pV.stop()
+         # pV.stop()
           GPIO.cleanup()
 
         time.sleep(10)
