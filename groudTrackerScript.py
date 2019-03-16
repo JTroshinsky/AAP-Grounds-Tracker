@@ -21,10 +21,12 @@ class servoPeram:
 def calcAngles():
     r = 20902000 #radius of earth
 
-    a = 45
-    c = 45
+    a = math.pow(math.sin(math.radians(bLoc.lat-tLoc.lat)/2),2) + math.cos(tLoc.lat) * math.cos(bLoc.lat) * math.pow(math.sin(math.radians(bLoc.lon-tLoc.lon)/2),2)
+    c = 2 * math.atan2(math.sqrt(a),math.sqrt(1-a))
 
     d = r*c #distance across earths surface
+
+    print(d)
 
     h = math.fabs(bLoc.alt - tLoc.alt) #differnce in height
 
@@ -38,7 +40,7 @@ def main():
 
     #os.chdir("C:\\Users\\Jack Troshinsky\\Documents\\AAP\\Script")
 
-    servoPINH = 20
+    servoPINH = 13
     servoPINV = 21
     GPIO.setmode(GPIO.BCM)
     GPIO.setup(servoPINH, GPIO.OUT)
@@ -49,6 +51,8 @@ def main():
 
     #pV = GPIO.PWM(servoPINV, 50) # GPIO 20 for PWM with 50Hz
     #pV.start(2.5) # Initialization
+
+    calcAngles()
 
     while(1):
 
