@@ -5,12 +5,12 @@ import math
 
 class bLoc:
     lat = 44.960217
-    long = -93.202116
+    lon = -93.202116
     alt = 10000
 
 class tLoc:
     lat = 44.975055
-    long = -93.233332
+    lon = -93.233332
     alt = 830
 
 class servoPeram:
@@ -26,13 +26,19 @@ def calcAngles():
 
     d = r*c #distance across earths surface
 
-    print(d)
+    print("Distance to baloon: " + str(d) + "ft")
 
     h = math.fabs(bLoc.alt - tLoc.alt) #differnce in height
 
-    vAngle = 45 # vertical hAngle
+    vAngle = math.atan(h/d) # vertical hAngle
 
     hAngle = 45 #horizontal angle
+
+    print("Vertical angle: " + str(math.degrees(vAngle)) + " degrees")
+    print("Horizantal angle: NA degrees")
+
+    servoPeram.vAngle = (vAngle/90)*10+2.5
+    print("Servo PWM Vertical: " + str(servoPeram.vAngle))
 
 
 
@@ -65,7 +71,10 @@ def main():
             pH.ChangeDutyCycle(10)
             time.sleep(1)
             pH.ChangeDutyCycle(12.4)
-            time.sleep(1)
+            time.sleep(5)
+
+            pH.ChangeDutyCycle(servoPeram.vAngle)
+            time.sleep(5)
 
         except KeyboardInterrupt:
           pH.stop()
