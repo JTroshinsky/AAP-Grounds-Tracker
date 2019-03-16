@@ -44,10 +44,10 @@ def main():
     GPIO.setup(servoPINH, GPIO.OUT)
     GPIO.setup(servoPINV, GPIO.OUT)
 
-    pH = GPIO.PWM(servoPIN, 50) # GPIO 20 for PWM with 50Hz
+    pH = GPIO.PWM(servoPINH, 50) # GPIO 20 for PWM with 50Hz
     pH.start(2.5) # Initialization
 
-    pV = GPIO.PWM(servoPIN, 50) # GPIO 20 for PWM with 50Hz
+    pV = GPIO.PWM(servoPINV, 50) # GPIO 20 for PWM with 50Hz
     pV.start(2.5) # Initialization
 
     while(1):
